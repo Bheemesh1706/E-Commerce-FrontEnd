@@ -163,6 +163,7 @@
 .right-items{
     display: flex;
     flex-direction: row;
+    position: relative;
     align-items: center;
     justify-content: center;
     height: 11rem;
@@ -176,14 +177,82 @@
     border-radius: 50%;
     color: #0ac069;
     box-shadow: 1px 0.5px 2px rgb(177, 175, 175), inset 0 0 0 rgb(177, 175, 175);
-    transition: 0.5s;
+    transition: 300ms;
     
 }
+
+
 
 .layer-1:hover{
     box-shadow: 0 0 0 rgb(177, 175, 175),inset 2px 1px 3px rgb(177, 175, 175);
 
 }
+
+.layer-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: #0ac069;
+    color: black;
+    height: 11rem;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    clip-path: circle(00% at 100% 50%);
+    padding-left: 4rem;
+    transition: 0.15s;
+   
+}
+
+.layer-2 span{
+    transform: scale(1);
+}
+
+.layer-2-active
+{
+    opacity: 1;
+    pointer-events: auto;
+    clip-path: circle(100% at 100% 50%);
+}
+
+.layer-2-items
+{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    font-size: 4rem;
+    font-weight: bolder;
+    border-radius: 2.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1.5rem 0;
+    width: 7rem;
+    height: 3rem;
+  
+}
+
+.add ,.minus{
+    display: grid;
+    place-items: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    box-shadow:  0 0 0 #00000054, inset 0px 0px 0px 0 #00000054;
+}
+
+
+
+.add:hover,.minus:hover
+{
+    transition: 0.2s;
+    box-shadow:  0 0 0 #00000054, inset 2px 2px 8px 0 #00000054;
+}
+
+.total{
+    color: #0ac069;
+}
+
 
 /*Order Navbar*/
 
@@ -195,16 +264,25 @@
     opacity: 0;
     pointer-events: none;
     z-index: 1;
+    transition: 600ms;
 }
 
-.active {
+.active-container{
     opacity: 1;
     pointer-events: auto;
+    transition: 600ms;
 }
 
 .navbar-modal{
     float: right;
     background-color: white;
+    transform: translateX(100%);
+    transition: 300ms;
     height: 100vh;
     width: 40%;
+}
+
+.active-modal{
+    transform: translateX(0);
+    transition: 300ms;
 }

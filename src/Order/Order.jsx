@@ -4,9 +4,9 @@ export function Navbar({Cart})
 {   
   
     return(
-    <div className={"navbar-container" + (Cart? " active":" ") }  >
+    <div className={"navbar-container" + (Cart? " active-container":" ") }  >
 
-            <section className="navbar-modal" >
+            <section className={"navbar-modal" + (Cart? " active-modal":" ")} >
                    
             </section>
     </div>)
