@@ -1,43 +1,52 @@
-import React,{useEffect,useState}from "react";
+import React,{useEffect,useState,useContext}from "react";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import { CartContext } from "../Context/CartContext";
 
 export function Product({ProductDetails})
 {
 
     const [counter,setcounter] = useState(0);
     const [active,setactive] = useState(false);
+    const [cart, setcart] = useContext(CartContext);
+
+    useEffect(()=>{
+
+            const filtered = [
+              ...cart.filter(({ id }) => id !== ProductDetails.id)
+            ];
+              counter?setcart(c=>[...filtered,{...ProductDetails,unit:counter}]):setcart(filtered)
+
+                setactive(!!counter);
+    },[counter])
+
+
 
     const counterHandler=  () =>
     {   
         setcounter(counter+1);
-        setactive(true);
 
     }
 
     const addCounter = ()=>
     {
         setcounter(counter+1);
+
     }
 
     const minusCounter = ()=>
     {
         setcounter(counter-1);
-        console.log("");
+        
 
-        if ( counter == 0 )
-        {
-            setactive(false);
-            setcounter(0);
-            
-        }
+     
     }
 
     return(
         <div className="Product"> 
 
             <section className="Product-Detail">
-                    {ProductDetails}
+                    {ProductDetails.item}
             </section>
 
             <section className="Product-Container">
@@ -46,9 +55,9 @@ export function Product({ProductDetails})
 
                     <div className="left-items">
                         <section className="sup">₹</section>
-                        <span>60</span>
+                        <span>{ProductDetails.Price}</span>
                         <sub>/
-                            1kg</sub>
+                            {ProductDetails.weight}</sub>
                     </div>
 
                 </section>

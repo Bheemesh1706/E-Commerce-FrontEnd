@@ -81,6 +81,7 @@
 .navbar-items span {
     transform: scale(1.5);
 }
+
 /*Dashboard*/
 
 .Dashboard{
@@ -280,9 +281,42 @@
     transition: 300ms;
     height: 100vh;
     width: 40%;
+    padding: 2rem 2rem;
+}
+
+.navbar-modal p {
+    font-size: 2rem;
+    justify-content: center;
+
 }
 
 .active-modal{
     transform: translateX(0);
     transition: 300ms;
 }
+
+
+.card-container{
+    background-color: aqua;
+    min-height: 7rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 2.75rem;
+    padding: 1rem 1rem;
+}
+
+.card-footer{
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    font-size: 2.75rem;
+}
+
+
