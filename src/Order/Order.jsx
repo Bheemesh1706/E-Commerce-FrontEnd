@@ -4,8 +4,7 @@ import { CartContext } from "../Context/CartContext";
 
 export function Navbar({Cart})
 {   
-    const [cart,setcart] = useContext(CartContext);
-    const [quantity,setquantity] = useState(0);
+    const [cart,setcart,quantity,setquantity] = useContext(CartContext);
 
     useEffect(()=>{
 
@@ -13,11 +12,16 @@ export function Navbar({Cart})
     
     },[cart])
 
-    return(
-    <div className={"navbar-container" + (Cart? " active-container":" ") }  >
-
-            <section className={"navbar-modal" + (Cart? " active-modal":" ")} >
-                   {quantity?<Card/>:<p>Cart Empty</p>}
-            </section>
-    </div>)
+    return (
+      <div className={"navbar-container" + (Cart ? " active-container" : " ")}>
+        <section className={"navbar-modal" + (Cart ? " active-modal" : " ")}>
+          {quantity ? (
+            cart.map((item) => (item.unit > 0 ? <Card item={item} /> : ""))
+          ) : (
+            <p>Cart Empty</p>
+          )}
+          { quantity? <button className="navbar-modal-button"  onClick={()=>setcart([])}>Clear Cart</button> : " "} 
+        </section>
+      </div>
+    );
 }

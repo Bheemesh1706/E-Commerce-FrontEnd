@@ -78,9 +78,7 @@
     margin: 0 2rem;
 }
 
-.navbar-items span {
-    transform: scale(1.5);
-}
+
 
 /*Dashboard*/
 
@@ -284,6 +282,23 @@
     padding: 2rem 2rem;
 }
 
+.navbar-modal-button{
+    height: 3rem;
+    width: 8rem;
+    font-size: 1.25rem;
+    color: black;
+    border: none;
+    border-radius: 1rem;
+    box-shadow:  0 0 0 #00000054, inset 0px 0px 0px 0 #00000054;
+}
+
+.navbar-modal-button:active{
+    transition: 0.2s;
+    box-shadow:  0 0 0 #00000054, inset 2px 2px 8px 0 #00000054;
+}
+.icon{
+    transform: scale(1.5);
+}
 .navbar-modal p {
     font-size: 2rem;
     justify-content: center;
@@ -297,7 +312,6 @@
 
 
 .card-container{
-    background-color: aqua;
     min-height: 7rem;
     width: 100%;
     display: flex;
@@ -306,6 +320,13 @@
     align-items: flex-start;
     font-size: 2.75rem;
     padding: 1rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 33%);
+}
+
+.card-container p {
+    margin-bottom: 1rem;
 }
 
 .card-footer{
