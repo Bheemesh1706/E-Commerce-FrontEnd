@@ -37,7 +37,7 @@
 
 .login-form form input,button,label {
     margin-bottom: 0.5em;
-    color: white;
+    color: rgb(0, 0, 0);
     box-shadow: 0;
 }
 

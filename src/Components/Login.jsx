@@ -1,14 +1,17 @@
 import React,{useEffect,useState}from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {loginSchema} from "./Schema"
-import  {Redirect} from  "react-router-dom"
+import {loginSchema} from "./Schema";
+import  {Redirect} from  "react-router-dom";
+import { sendDataLogin } from "../Backend/Services";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export function Login()
 {       
 
    const [redirect,setRedirect] = useState(null)
-   
+   const [Token, setToken] = useContext(AuthContext);
    const  {register,handleSubmit,reset,formState: { errors } } = useForm({
        resolver: yupResolver(loginSchema)
    })
@@ -16,10 +19,22 @@ export function Login()
    useEffect(()=>{console.log('reset')
        reset()},[])
     
+   
 
    const handleLogin  = (e) =>{
        console.log(e)
        console.log('Login') 
+       sendDataLogin(e).then((e)=>
+       {
+           if(e.jwt)
+           {    console.log(e)
+               setToken(e.jwt)
+           }
+           else
+           {
+    document.getElementById("error").innerText =e.error_message;
+           }
+       })
     }
 
      return(
