@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useContext}from "react";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { CartContext } from "../Context/CartContext";
+import { CartContext } from "../../Context/CartContext";
 
 export function Product({ProductDetails})
 {

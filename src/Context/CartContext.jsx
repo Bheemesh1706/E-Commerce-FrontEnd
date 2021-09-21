@@ -6,9 +6,9 @@ export const CartProvider = (props) => {
   const [cart, setcart] = useState([]);
   const [quantity, setquantity] = useState(0);
 
-  // useEffect(()=>{
-  //     console.log({cart})
-  // },[cart])
+  useEffect(()=>{
+      console.log({cart})
+  },[cart])
 
   return (
     <CartContext.Provider value={[cart, setcart, quantity, setquantity]}>

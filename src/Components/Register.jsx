@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./Schema";
 import { Redirect } from "react-router-dom";
+import { sendDataRegister } from "../Backend/Services";
+import { AuthContext } from "../Context/AuthContext";
+
 
 export function Register() {
-  const [redirect, setRedirect] = useState(null);
 
+  const [redirect, setRedirect] = useState(null);
+  const [token,setToken] = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -24,6 +28,15 @@ export function Register() {
   const handleRegister = (e) => {
     console.log(e);
     console.log("register");
+    sendDataRegister(e).then((e)=>{
+      if (e.jwt) {
+        console.log(e);
+        setToken(e.jwt);
+      } else {
+        document.getElementById("error").innerText = e.error_message;
+      }
+    });
+
   };
 
   const InputValues = [
