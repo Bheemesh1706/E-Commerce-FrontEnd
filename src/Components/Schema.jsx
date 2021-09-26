@@ -59,4 +59,14 @@ const registerSchema = yup.object().shape({
     .matches(/^[0-9]+$/, "Must be only digits"),
 });
 
-export { loginSchema, registerSchema };
+const addressSchema = yup.object().shape({
+  Address: yup
+    .string()
+    .required()
+    .matches(
+      /^[a-zA-Z0-9\s,'-:/]+$/,
+      "Only allowed Special Charecters are /,:-"
+    ),
+});
+
+export { loginSchema, registerSchema,addressSchema };

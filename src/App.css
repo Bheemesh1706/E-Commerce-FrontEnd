@@ -349,6 +349,25 @@
     font-size: 2.75rem;
 }
 
+.place-order-button{
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.address-box{
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: rgba(0,0,0,0.1);
+    color: black;
+}
+
  /*Menu*/
 
  .Menu-Button{
@@ -356,5 +375,6 @@
      width: 100%;
      font-size: 2.5rem;
      background-color: aqua;
+    
  }
 
