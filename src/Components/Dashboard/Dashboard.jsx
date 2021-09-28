@@ -48,7 +48,7 @@ export function Dashboard() {
         </nav>
       </section>
       <section>
-        <Navbar Cart={activecart} />
+        <Navbar Cart={activecart} setCart={setActiveCart} />
       </section>
       <section>
         <MenuBar Menu={activemenu} />

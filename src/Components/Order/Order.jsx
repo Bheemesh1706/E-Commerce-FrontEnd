@@ -3,7 +3,7 @@ import { Card } from "./OrderCard";
 import { CartContext } from "../../Context/CartContext";
 import { PlaceOrderCard } from "./PlaceOrderCard";
 
-export function Navbar({Cart})
+export function Navbar({Cart,setCart})
 {   
     const [cart,setcart,quantity,setquantity] = useContext(CartContext);
 
@@ -42,7 +42,7 @@ export function Navbar({Cart})
       </div>) : (
          <div className={"navbar-container" + (Cart ? " active-container" : " ")}>
           <section className={"navbar-modal" + (Cart ? " active-modal" : " ")}>
-           <PlaceOrderCard setOrder={setOrder}/>
+           <PlaceOrderCard setOrder={setOrder} setCart={setCart}/>
          </section>
       </div>)}  
     </div>);

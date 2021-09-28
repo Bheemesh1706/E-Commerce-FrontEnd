@@ -3,10 +3,14 @@ import { CartContext } from "../../Context/CartContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addressSchema } from "../Schema";
 import { useForm } from "react-hook-form";
+import { sendOrderData } from "../../Backend/Services";
+import { AuthContext } from "../../Context/AuthContext";
 
-export function PlaceOrderCard({setOrder}) {
+
+export function PlaceOrderCard({setOrder,setCart}) {
     
  const [cart, setcart, quantity, setquantity] = useContext(CartContext);
+ const [Token,setToken] = useContext(AuthContext);
  const {
    register,
    handleSubmit,
@@ -22,15 +26,28 @@ export function PlaceOrderCard({setOrder}) {
    return totalcost
  }
 
- const handleOrder= (e) =>{
-   console.log(e);
+ const handleOrder= (address) =>{
+   console.log(address);
+   console.log(cart);
+   const User = Token.split(".");
+   const UserID = JSON.parse(atob(User[1]));
+   const Id = UserID.id;
+   const Total = CalculateTotal();
+   sendOrderData({address,cart,Id,Total}).then((e)=>{
+     console.log(e.sucess_message);
+     if (e.sucess_message === "Order Initiated!") {
+       setOrder(false);
+       setCart(false);
+       setcart([])
+     }
+   });
  }
 
   return (
     <div className="card-container">
       {cart.map((item, index) => (
         <React.Fragment key={index}>
-          <p>{item.item}</p>
+          <p>{item.Name}</p>
           <p>Count: {item.unit}</p>
           <section className="card-footer">
             <p>Cost:</p>

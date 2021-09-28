@@ -4,7 +4,7 @@ export function Card ({item})
 {
     return(
     <div className="card-container">
-            <p>{item.item}</p>
+            <p>{item.Name}</p>
             <p>Count: {item.unit}</p>
             <section className="card-footer">
                 <p>Cost:</p>

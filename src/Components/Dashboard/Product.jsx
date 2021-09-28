@@ -13,7 +13,7 @@ export function Product({ProductDetails})
     useEffect(()=>{
 
             const filtered = [
-              ...cart.filter(({ id }) => id !== ProductDetails.id)
+              ...cart.filter(({ _id }) => _id !== ProductDetails._id)
             ];
               counter?setcart(c=>[...filtered,{...ProductDetails,unit:counter}]):setcart(filtered)
 
@@ -46,7 +46,7 @@ export function Product({ProductDetails})
         <div className="Product"> 
 
             <section className="Product-Detail">
-                    {ProductDetails.item}
+                    {ProductDetails.Name}
             </section>
 
             <section className="Product-Container">
@@ -57,7 +57,7 @@ export function Product({ProductDetails})
                         <section className="sup">₹</section>
                         <span>{ProductDetails.Price}</span>
                         <sub>/
-                            {ProductDetails.weight}</sub>
+                            {ProductDetails.Weight}</sub>
                     </div>
 
                 </section>
