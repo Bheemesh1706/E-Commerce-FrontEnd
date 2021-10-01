@@ -15,7 +15,7 @@ export function Product({ProductDetails})
             const filtered = [
               ...cart.filter(({ _id }) => _id !== ProductDetails._id)
             ];
-              counter?setcart(c=>[...filtered,{...ProductDetails,unit:counter}]):setcart(filtered)
+              counter?setcart(c=>[...filtered,{...ProductDetails,Count:counter}]):setcart(filtered)
 
                 setactive(!!counter);
     },[counter])

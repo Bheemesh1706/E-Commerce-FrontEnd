@@ -1,10 +1,33 @@
-import React,{useContext, useState} from "react";
+import React,{useContext, useState,useEffect} from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import {getOrderDetails} from "../../Backend/Services"
+import {getOrderIds} from "../../Backend/Services"
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ConfirmOrderCard } from "../Order/ConfirmOrderCard";
+
 export function MenuBar({ Menu }) {
 
 const [Token, setToken] = useContext(AuthContext);
+const [page,setPage] =  useState(1);
+const [order,setOrder] = useState([]);
+const [orderid,setOrderId] = useState([]);
 const [orderList,setOrderList] = useState(false);
+
+useEffect(()=>
+{
+  getOrderIds(Token,page).then((e)=>{
+    console.log(e);
+    console.log('order');
+    console.log(page);
+    setOrderId([...orderid,...e]);
+    console.log(orderid);
+  });
+
+},[page])
+
+useEffect(()=>{
+    console.log("Order Details");
+
+},[orderid])
 
   return (
     <div>
@@ -26,7 +49,30 @@ const [orderList,setOrderList] = useState(false);
           className={"navbar-container" + (Menu ? " active-container" : " ")}
         >
           <section className={"navbar-modal" + (Menu ? " active-modal" : " ")}>
-            <p onClick={()=> getOrderDetails(Token)}>Orders</p>
+            {/* <InfiniteScroll
+              dataLength={order.length}
+              next={setPage(page + 1)}
+              hasMore={true}
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>END</b>
+                </p>
+              }
+            >
+            </InfiniteScroll> */}
+            <button
+              className="navbar-modal-button"
+              onClick={() => setPage(page + 1)}
+            >
+              Page
+            </button>
+            <button
+              className="navbar-modal-button"
+              onClick={() => setPage(0)}
+            >
+              Reset
+            </button>
             <button
               className="navbar-modal-button"
               onClick={() => setOrderList(false)}

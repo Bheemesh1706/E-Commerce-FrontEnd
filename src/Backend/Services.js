@@ -48,18 +48,35 @@ const sendOrderData = async (data) => {
   }
 };
 
-const getOrderDetails = async (data) => {
+const getOrderIds = async (data,pg) => {
   try {
     console.log("get_orders");
     const response = await axi.get(`${API_HOST}/product/get-order`, {
       params: {
         token: data,
+        page: pg,
       },
     });
     console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getOrderDetails = async (data, Id) => {
+  try {
+    console.log("get_orders");
+    const response = await axi.get(`${API_HOST}/product/get-order`, {
+      params: {
+        token: data,
+        Id: Id,
+      },
+    });
+    console.log(response);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export { sendDataLogin, sendDataRegister, sendOrderData, getOrderDetails };
+export { sendDataLogin, sendDataRegister, sendOrderData, getOrderDetails,getOrderIds };

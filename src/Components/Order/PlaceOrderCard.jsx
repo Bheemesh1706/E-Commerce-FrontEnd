@@ -22,7 +22,7 @@ export function PlaceOrderCard({setOrder,setCart}) {
 
  const CalculateTotal= () =>{
    var totalcost = 0;
-   cart.map((item)=> {totalcost = totalcost + (item.unit*item.Price)})
+   cart.map((item)=> {totalcost = totalcost + (item.Count*item.Price)})
    return totalcost
  }
 
@@ -48,13 +48,13 @@ export function PlaceOrderCard({setOrder,setCart}) {
       {cart.map((item, index) => (
         <React.Fragment key={index}>
           <p>{item.Name}</p>
-          <p>Count: {item.unit}</p>
+          <p>Count: {item.Count}</p>
           <section className="card-footer">
             <p>Cost:</p>
             <p>
-              {item.unit}*{item.Price}
+              {item.Count}*{item.Price}
             </p>
-            <p>Total: Rs {item.unit * item.Price}</p>
+            <p>Total: Rs {item.Count * item.Price}</p>
           </section>
         </React.Fragment>
       ))}

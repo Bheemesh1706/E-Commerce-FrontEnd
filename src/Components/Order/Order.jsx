@@ -11,7 +11,7 @@ export function Navbar({Cart,setCart})
 
     useEffect(()=>{
 
-        setquantity(cart.reduce((sum,item)=>sum+item.unit,0))
+        setquantity(cart.reduce((sum,item)=>sum+item.Count,0))
     
     },[cart])
 
@@ -21,7 +21,7 @@ export function Navbar({Cart,setCart})
           <div className={"navbar-container" + (Cart ? " active-container" : " ")}>
           <section className={"navbar-modal" + (Cart ? " active-modal" : " ")}>
           {quantity ? (
-            cart.map((item) => (item.unit > 0 ? <Card item={item} /> : ""))
+            cart.map((item) => (item.Count > 0 ? <Card item={item} /> : ""))
           ) : (
             <p>Cart Empty</p>
           )}
