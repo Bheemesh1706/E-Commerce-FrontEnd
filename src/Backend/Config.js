@@ -1,1 +1,1 @@
-export const API_HOST = "http://localhost:3001/api";
+export const API_HOST = "https://e-com-node.herokuapp.com/api";
