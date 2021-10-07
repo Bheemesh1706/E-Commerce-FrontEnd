@@ -52,7 +52,7 @@ export function PlaceOrderCard({setOrder,setCart}) {
           <section className="card-footer">
             <p>Cost:</p>
             <p>
-              {item.Count}*{item.Price}
+             Rs {item.Price}
             </p>
             <p>Total: Rs {item.Count * item.Price}</p>
           </section>

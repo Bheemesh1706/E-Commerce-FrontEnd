@@ -1,16 +1,16 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./Schema";
 import { Redirect } from "react-router-dom";
 import { sendDataRegister } from "../Backend/Services";
-import { AuthContext } from "../Context/AuthContext";
+import { useAuth} from "../Context/AuthContext";
 
 
 export function Register() {
 
   const [redirect, setRedirect] = useState(null);
-  const [token,setToken] = useContext(AuthContext);
+  const [Token,setToken] = useAuth();
   const {
     register,
     handleSubmit,
@@ -48,6 +48,7 @@ export function Register() {
     { name: "code", placeholder: "Code" },
   ];
 
+  if (Token) return <Redirect to="/dashboard" />;
   return (
     <div className="container-login">
       <section className="login-form">
@@ -56,16 +57,25 @@ export function Register() {
           {InputValues.map(({ name, placeholder }) => (
             <>
               <input
-                type={name === "password" | name === "confirmpassword" ?"password":"text"}
+                type={
+                  (name === "password") | (name === "confirmpassword")
+                    ? "password"
+                    : "text"
+                }
                 id={name}
                 placeholder={placeholder}
                 name={name}
                 {...register(name)}
               />
-              {errors[name] && <p className="error2"> {errors[name].message}</p>}
+              {errors[name] && (
+                <p className="error2"> {errors[name].message}</p>
+              )}
             </>
           ))}
           <button type="submit">Register</button>
+          <p>
+            Have an Account? <a href="/login">Sign In</a>
+          </p>
         </form>
       </section>
     </div>

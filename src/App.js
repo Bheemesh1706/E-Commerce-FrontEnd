@@ -10,10 +10,12 @@ import {
   Redirect,
 } from "react-router-dom";
 import {Register} from './Components/Register';
+import { useAuth } from './Context/AuthContext';
 
 
 function App() {
 
+  const  [Token] =useAuth();
   return (
     <Router>
     
@@ -21,9 +23,9 @@ function App() {
           <head></head>
           <body>
             <Switch>
-              <Route exact path="/dashboard">
+              {Token && <Route exact path="/dashboard">
                 <Dashboard />
-              </Route>
+              </Route>}
               <Route exact path="/login">
                 <Login />
               </Route>

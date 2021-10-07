@@ -1,33 +1,35 @@
-import React,{useContext, useState,useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import {getOrderIds} from "../../Backend/Services"
+import { getOrderItemDetails, getOrderDetails } from "../../Backend/Services";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ConfirmOrderCard } from "../Order/ConfirmOrderCard";
 
+import OrderDetailsCard from "../Order/OrderDetailsCard";
+
 export function MenuBar({ Menu }) {
+  const [Token, setToken] = useContext(AuthContext);
+  const [page, setPage] = useState(1);
+  const [order, setOrder] = useState([]);
+  const [orderid, setOrderId] = useState([]);
+  const [orderList, setOrderList] = useState(false);
 
-const [Token, setToken] = useContext(AuthContext);
-const [page,setPage] =  useState(1);
-const [order,setOrder] = useState([]);
-const [orderid,setOrderId] = useState([]);
-const [orderList,setOrderList] = useState(false);
+  useEffect(() => {
+    getOrderDetails(Token, page).then((e) => {
+      console.log(e);
+      console.log("order");
+      console.log(page);
+      setOrderId([...orderid, ...e]);
+      console.log(orderid);
+    });
+  }, [page]);
 
-useEffect(()=>
-{
-  getOrderIds(Token,page).then((e)=>{
-    console.log(e);
-    console.log('order');
-    console.log(page);
-    setOrderId([...orderid,...e]);
-    console.log(orderid);
-  });
-
-},[page])
-
-useEffect(()=>{
-    console.log("Order Details");
-
-},[orderid])
+  useEffect(() => {
+    for (let i = (page - 1) * 2; i < orderid.length; i++) {
+      getOrderItemDetails(Token, orderid[i]?._id).then((e) => {
+        setOrder((order) => [...order, ...e]);
+      });
+    }
+  }, [orderid]);
 
   return (
     <div>
@@ -49,9 +51,9 @@ useEffect(()=>{
           className={"navbar-container" + (Menu ? " active-container" : " ")}
         >
           <section className={"navbar-modal" + (Menu ? " active-modal" : " ")}>
-            {/* <InfiniteScroll
+            <InfiniteScroll
               dataLength={order.length}
-              next={setPage(page + 1)}
+              next={()=>setPage(pg=> pg + 1)}
               hasMore={true}
               loader={<h4>Loading...</h4>}
               endMessage={
@@ -59,20 +61,14 @@ useEffect(()=>{
                   <b>END</b>
                 </p>
               }
-            >
-            </InfiniteScroll> */}
-            <button
-              className="navbar-modal-button"
-              onClick={() => setPage(page + 1)}
-            >
-              Page
-            </button>
-            <button
-              className="navbar-modal-button"
-              onClick={() => setPage(0)}
-            >
-              Reset
-            </button>
+
+            > {orderid.map((item, index) => (
+              <React.Fragment key={index}>
+                <OrderDetailsCard Order={item} OrderDetails={order} />
+              </React.Fragment>
+            ))}
+            </InfiniteScroll>
+
             <button
               className="navbar-modal-button"
               onClick={() => setOrderList(false)}

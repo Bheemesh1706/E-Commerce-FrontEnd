@@ -16,19 +16,23 @@ export function Dashboard() {
   const [Token, setToken] = useContext(AuthContext);
 
   const [activecart, setActiveCart] = useState(false);
-  const [activemenu,setActiveMenu] = useState(false);
+  const [activemenu, setActiveMenu] = useState(false);
 
   const carthandler = () => {
+    if (activemenu) {
+      setActiveMenu(!activemenu);
+    }
     setActiveCart(!activecart);
-
   };
 
-  const menuhandler = ()=>{
+  const menuhandler = () => {
+    if (activecart) {
+      setActiveCart(!activecart);
+    }
     setActiveMenu(!activemenu);
-  }
+  };
 
   return (
-    
     <div className="Dashboard">
       <section className="navbar">
         <nav className="navbar-items">

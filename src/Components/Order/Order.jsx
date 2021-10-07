@@ -21,7 +21,7 @@ export function Navbar({Cart,setCart})
           <div className={"navbar-container" + (Cart ? " active-container" : " ")}>
           <section className={"navbar-modal" + (Cart ? " active-modal" : " ")}>
           {quantity ? (
-            cart.map((item) => (item.Count > 0 ? <Card item={item} /> : ""))
+            cart.map((item) => (item.Count > 0 ? <Card Order={item} /> : ""))
           ) : (
             <p>Cart Empty</p>
           )}

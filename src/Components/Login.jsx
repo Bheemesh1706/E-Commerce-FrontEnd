@@ -4,14 +4,13 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {loginSchema} from "./Schema";
 import  {Redirect} from  "react-router-dom";
 import { sendDataLogin } from "../Backend/Services";
-import { useContext } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import { useAuth } from "../Context/AuthContext";
 
 export function Login()
 {       
 
    const [redirect,setRedirect] = useState(null)
-   const [Token, setToken] = useContext(AuthContext);
+   const [Token, setToken] = useAuth();
    const  {register,handleSubmit,reset,formState: { errors } } = useForm({
        resolver: yupResolver(loginSchema)
    })
@@ -36,7 +35,7 @@ export function Login()
            }
        })
     }
-
+    if(Token) return <Redirect to="/dashboard"/>
      return(
          <div className="container-login">
                 <section className ="login-form">
@@ -48,7 +47,9 @@ export function Login()
                             {errors.Password && <p className = "error3"> {errors.Password.message}</p>} 
                             <p id = "error"></p>
                             <button type='submit'>Login</button>
+                            <p>New here? <a href="/">Register</a></p>
                         </form>
+
                 </section>
          </div>
      );
