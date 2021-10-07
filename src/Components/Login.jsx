@@ -25,13 +25,13 @@ export function Login()
        console.log('Login') 
        sendDataLogin(e).then((e)=>
        {
-           if(e.jwt)
+           if(e?.jwt)
            {    console.log(e)
                setToken(e.jwt)
            }
            else
            {
-    document.getElementById("error").innerText =e.error_message;
+    document.getElementById("error").innerText =e?.error_message;
            }
        })
     }
