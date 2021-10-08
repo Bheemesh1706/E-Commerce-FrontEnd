@@ -31,3 +31,8 @@
     npm start
 ```
 
+# Future Scopes  
+  - Create a Admin Page using React Admin.
+  - Add custom payment page.
+  - Make this app into an npx package.
+
