@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState , useEffect} from "react";
+import { API_HOST } from "../Backend/Config";
 
 
 
@@ -35,7 +36,7 @@ export default function useProducts() {
 
   const getProducts = async()=>{
 
-    const {data} = await axios.get("http://localhost:3001/api/product");
+    const {data} = await axios.get(`${API_HOST}/product`);
     console.log(data);
     setProducts(data.products);
 
