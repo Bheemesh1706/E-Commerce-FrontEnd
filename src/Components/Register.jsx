@@ -1,16 +1,14 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./Schema";
 import { Redirect } from "react-router-dom";
 import { sendDataRegister } from "../Backend/Services";
-import { useAuth} from "../Context/AuthContext";
-
+import { useAuth } from "../Context/AuthContext";
 
 export function Register() {
-
   const [redirect, setRedirect] = useState(null);
-  const [Token,setToken] = useAuth();
+  const [Token, setToken] = useAuth();
   const {
     register,
     handleSubmit,
@@ -28,19 +26,19 @@ export function Register() {
   const handleRegister = (e) => {
     console.log(e);
     console.log("register");
-    sendDataRegister(e).then((e)=>{
-      if (e.jwt) {
+    sendDataRegister(e).then((e) => {
+      console.log(e);
+      if (e?.jwt) {
         console.log(e);
         setToken(e.jwt);
       } else {
-        document.getElementById("error").innerText = e.error_message;
+        document.getElementById("error").innerText = e?.error_message;
       }
     });
-
   };
 
   const InputValues = [
-    { name: "username", placeholder: "username" },
+    { name: "username", placeholder: "Username" },
     { name: "password", placeholder: "Password" },
     { name: "confirmpassword", placeholder: "Confirm Password" },
     { name: "address", placeholder: "Address" },
@@ -72,6 +70,7 @@ export function Register() {
               )}
             </>
           ))}
+          <p id="error"></p>
           <button type="submit">Register</button>
           <p>
             Have an Account? <a href="/login">Sign In</a>

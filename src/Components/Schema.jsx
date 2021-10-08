@@ -32,10 +32,10 @@ const registerSchema = yup.object().shape({
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]+$/,
       "Password must contain atleast one speacial charecter, digit and a capital letter"
     ),
-  confirmPassword: yup
+  confirmpassword: yup
     .string()
     .required("Confirm Password is required")
-    .oneOf([yup.ref("Password"), null], "Passwords doesn't match"),
+    .oneOf([yup.ref("password"), null], "Passwords doesn't match"),
   address: yup
     .string()
     .required()
